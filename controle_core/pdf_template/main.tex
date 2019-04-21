@@ -1,0 +1,99 @@
+% ------------------------------------------------------------------------
+% TCC1..2: Modelo de Carta Convite para Composição de Banca
+% 
+% Template por Francisco Reinaldo 
+%		(https://orcid.org/0000-0001-6161-6755)
+%		(http://lattes.cnpq.br/7401534350061823)
+% Inspirado na carta de Andreza Quintas :)
+% 27.out.17 versao 1
+% 30.out.17 versao 2
+% 17.nov.17 versao 3
+% ------------------------------------------------------------------------
+% Agradecimentos a Overleaf pela oportunidade 
+% ------------------------------------------------------------------------
+
+\documentclass[12pt]{article} 
+\usepackage[a4paper,left=30mm,right=25mm,top=30mm,bottom=25mm,headsep=15.5mm]{geometry} 
+
+\usepackage[brazil]{babel}                                 
+\usepackage[T1]{fontenc} 
+\usepackage[utf8]{inputenc}
+
+\renewcommand{\familydefault}{\sfdefault} 
+\linespread{1.75} 
+\usepackage{indentfirst,graphicx} 
+\usepackage[absolute]{textpos}
+\def \datadeentregadotrabalhoparadisciplina{25 de novembro de 2017} % não alterar
+
+%---------EXCLUSIVA ENTRADA DE DADOS PELO ALUNO-------
+\def \profconvidado{DAINF - Profa. Doutora Maici Duarte Leite}
+\def \profgenero{a}%a p/ feminino, o para masculino
+\def \tcc1outcc2{1}
+\def \titulotrabalho{Novas Tecnologias para a Educação}
+\def \discentecomra{Andreza Quintas - 123456}
+\def \defesadatacompletacomdiadasemana{6 de novembro de 2017 (Segunda-feira)}
+\def \defesahora{19h30min}
+\def \defesasala{Q204}
+\def \datadeentregadotrabalhoparaleitura{1 de novembro de 2017}
+\def \proforientador{DAINF - Prof. Doutor Eng. Francisco Antonio Fernandes Reinaldo}
+%------------------------------------------------------
+
+\begin{document}
+\pagestyle{myheadings}
+\newpage \pagenumbering{arabic}
+\thispagestyle{empty}
+
+\begin{center}
+    \begin{textblock*}{\linewidth}(3cm,1cm)%{width}[xt,yt](X,Y)
+    \centering
+    \includegraphics[width=\linewidth]{logo.png}
+    \end{textblock*} ~\\[1em]
+\end{center}
+
+\vspace{\fill}
+\begin{center}
+\begin{large}
+CARTA CONVITE\\[1em] PARA COMPOSIÇÃO DE MEMBRO EM BANCA EXAMINADORA
+\end{large}
+\end{center}
+
+\vspace{\fill}
+Prezad\profgenero\ \textbf{\profconvidado},
+
+\vspace{\fill}
+Temos a imensa satisfação de convidá-l\profgenero\ para participar como membro da Banca Examinadora do Seminário de Trabalho de Conclusão de Curso (
+\textbf{\tcc1outcc2}
+) intitulado 
+\textbf{\MakeUppercase{\titulotrabalho}}
+que será apresentado no dia 
+\textbf{\defesadatacompletacomdiadasemana} às 
+\textbf{\defesahora} na sala 
+\textbf{\defesasala}.
+
+% ---
+% Parágrafo para alunos que acertaram entregar atrasado (Não alterar o texto abaixo)
+%
+%Contudo, os últimos ajustes de escrita me permitem entregar o trabalho confeccionado para avaliação dos membros da banca, incluindo meu orientador, até o dia \textbf{\datadeentregadotrabalhoparaleitura}. Estou ciente a data de entrega pela disciplina era \textbf{\datadeentregadotrabalhoparadisciplina} eque isto pode impactar negativamente na minha avaliação, inclusive que possivelmente eu não vá a defesa conforme avaliação de meu orientador e já peço desculpas pelo desgate da banca.
+
+Aguardo sua confirmação com a simples resposta ``ACEITE'' por este e-mail e antecipadamente agradeço a sua participação. 
+
+\vspace{\fill}
+\hspace{\fill} Francisco Beltrão-PR, \today.
+\vspace{\fill}
+
+\begin{center}
+\linespread{1} \small 
+\textbf{\discentecomra\\(Discente)}
+
+\vspace{2em}
+\textbf{\proforientador\\(Orientador)}
+\end{center}
+
+
+%Lista atualizada de ORIENTADORES para linha 11 está em: 
+%https://www.evernote.com/shard/s3/sh/ee5e7ac6-c6f0-40b2-8cc5-13dd40b21169/b1198a24fe32e9f4
+
+
+
+
+\end{document}
