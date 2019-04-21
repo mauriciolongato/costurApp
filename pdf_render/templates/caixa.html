@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Bootstrap Example</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+    <style>
+        td {
+          font-size: 18px;
+        }
+        th {
+            font-size: 15px;
+        }
+    </style>
+
+</head>
+<body>
+    <div class="container">
+        <h2>Resumo da Caixa: {{data.header.nome_caixa}}</h2>
+        <hr>
+        <table>
+            <tbody>
+                <tr>
+                    <td class="nome_cliente">Cliente:</td>
+                    <td class="nome_cliente">{{data.header.nome_cliente}}</td>
+                </tr>
+                <tr>
+                    <td class="pedido_op">Referência:</td>
+                    <td class="pedido_op">{{data.header.pedido_op}}</td>
+                </tr>
+                <tr>
+                    <td class="nome_referencia">Descrição:</td>
+                    <td class="nome_referencia">{{data.header.nome_referencia}}</td>
+                </tr>
+                <tr>
+                    <td class="nome_sequencia">Nome da Sequência:</td>
+                    <td class="nome_sequencia">{{data.header.nome_sequencia}}</td>
+                </tr>
+            </tbody>
+        </table>
+        <hr>
+        <br>
+        <table class="table">
+            <thead class="thead-dark">
+                <tr>
+                    <th scope="col">Maquina</th>
+                    <th scope="col">Ordem Execução</th>
+                    <th scope="col">Nome Ação</th>
+                    <th scope="col">Tempo Meta</th>
+                    <th scope="col">Código de Barras</th>
+                    <th scope="col">Imagem</th>
+                </tr>
+            </thead>
+            <tbody>
+            {% for item in data.body %}
+            <tr>
+               <td class="maquina">{{item.maquina}}</td>
+               <td class="ordem_execucao">{{item.ordem_execucao}}</td>
+               <td class="nome_acao"><SPAN>{{item.nome_acao}}</SPAN></td>
+               <td class="tempo_medio"><SPAN>{{item.tempo_medio}}</SPAN></td>
+               <td class="cod_bar"><SPAN>{{item.cod_bar}}</SPAN></td>
+               <td class="cod_bar_img"><img style="height: 120px" src="{{item.cod_bar_address}}"></td>
+            </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</body>
+</html>
