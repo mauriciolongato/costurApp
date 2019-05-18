@@ -1,3 +1,5 @@
+#!/usr/bin/env python
+# -*- coding: utf-8 -*-
 from django.core.files.base import ContentFile
 from django.db import models
 
@@ -74,7 +76,8 @@ class Pistola(models.Model):
     nome_pistola = models.CharField(max_length=500)
 
     class Meta:
-        verbose_name_plural = 'Pistolas'
+        verbose_name = 'Leitor de Código de Barras'
+        verbose_name_plural = 'Leitores de Código de Barras'
 
     def __str__(self):
         return u'%s' % self.nome_pistola
@@ -83,6 +86,10 @@ class Pistola(models.Model):
 # Maquina
 class Maquina(models.Model):
     nome_maquina = models.CharField(max_length=500)
+
+    class Meta:
+        verbose_name = 'Equipamento'
+        verbose_name_plural = 'Equipamentos'
 
     def __str__(self):
         return u'%s' % self.nome_maquina
@@ -94,7 +101,8 @@ class Acao(models.Model):
     nome_acao = models.CharField(max_length=500)
 
     class Meta:
-        verbose_name_plural = 'Ações'
+        verbose_name = 'Operação'
+        verbose_name_plural = 'Operações'
 
     def __str__(self):
         return u'%s' % self.nome_acao
@@ -116,10 +124,11 @@ class SequenciaAcao(models.Model):
     sequencia = models.ForeignKey(Sequencia, on_delete=models.CASCADE)
     acao = models.ForeignKey(Acao, on_delete=models.CASCADE)
     ordem_execucao = models.CharField(max_length=500)
-    tempo_meta = models.CharField(max_length=500)
+    tempo_padrao = models.CharField(max_length=500)
 
     class Meta:
-        verbose_name_plural = 'Sequencias e Ações'
+        verbose_name = 'Sequencia e Operações'
+        verbose_name_plural = 'Sequencias e Operações'
 
     def __str__(self):
         return u'%s' % self.id
@@ -157,6 +166,8 @@ class Alocacao(models.Model):
 
 class Caixa(models.Model):
     alocacao = models.ForeignKey(Alocacao, on_delete=models.CASCADE)
+    pedido = models.TextField(blank=True)
+    referencia = models.TextField(blank=True)
     pdf = models.FileField(upload_to='pdf/', blank=True)
 
     def create_backlog(self):
@@ -166,7 +177,11 @@ class Caixa(models.Model):
             b.save()
 
     def render_pdf(self):
+        self.pedido = self.alocacao.pedido.op
+        self.referencia = self.alocacao.referencia.nome_referencia
+
         body = []
+        html_bloco = {}
         for backlog in self.backlog_set.all():
             header = {'nome_cliente': backlog.cliente.nome_cliente,
                       'pedido_op': backlog.pedido_op,
@@ -179,14 +194,20 @@ class Caixa(models.Model):
             row = {'maquina': backlog.sequencia_acao.acao.maquina.nome_maquina,
                    'ordem_execucao': backlog.sequencia_acao.ordem_execucao,
                    'nome_acao': backlog.sequencia_acao.acao.nome_acao,
-                   'tempo_medio': backlog.sequencia_acao.tempo_meta,
+                   'tempo_medio': backlog.sequencia_acao.tempo_padrao,
                    'cod_bar': backlog.id
                    }
 
             body.append(row)
 
-        data = {'header': header, 'body': body}
-        r = requests.post('http://localhost:5000/', data=json.dumps(data, ensure_ascii=False))
+            nome_maquina = backlog.sequencia_acao.acao.maquina.nome_maquina
+            if nome_maquina in html_bloco:
+                html_bloco[nome_maquina].append(row)
+            else:
+                html_bloco[nome_maquina] = [row]
+
+        data = {'header': header, 'body': body, 'html_bloco': html_bloco}
+        r = requests.post('http://localhost:5000/', data=json.dumps(data))
         self.pdf.save('test_pdf_rendering.pdf', ContentFile(r.content))
 
     class Meta:
@@ -231,11 +252,9 @@ class BackLog(models.Model):
 
 # Log_Trabalho
 class LogTrabalho(models.Model):
-    pistola = models.ForeignKey(Pistola, on_delete=models.CASCADE)
-    funcionario = models.ForeignKey(Funcionario, on_delete=models.CASCADE)
-    id_leitura = models.IntegerField()
+    pistola = models.CharField(max_length=500)
     cod_barras = models.CharField(max_length=500)
-    data_criacao = models.DateTimeField(auto_now_add=True)
+    data_criacao = models.DateTimeField()
 
     class Meta:
         verbose_name_plural = 'Log_Trabalhos'

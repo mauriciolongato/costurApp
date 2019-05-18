@@ -24,6 +24,14 @@ def informacao_caixa():
                       'cod_bar': 123456789,
                       # 'cod_bar_address': '{}'.format(jobs.create_barcode(123456789)),
                       'cod_bar_address': functions.path2url('static/{}'.format(jobs.create_barcode(123456789))),
+                      },
+                      {'maquina': 'Maquina de Costura',
+                      'ordem_execucao': '1',
+                      'nome_acao': 'Costura Bolso',
+                      'tempo_medio': '1000',
+                      'cod_bar': 987654321,
+                      # 'cod_bar_address': '{}'.format(jobs.create_barcode(987654321)),
+                      'cod_bar_address': functions.path2url('static/{}'.format(jobs.create_barcode(987654321))),
                       }
                      ]
             }

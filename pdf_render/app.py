@@ -1,8 +1,15 @@
+#!/usr/bin/env python
+# -*- coding: utf-8 -*-
 from flask import Flask, render_template, make_response, request
 import json
 import pdfkit
+import logging
 
 from helpers import jobs, dados_testes, functions
+
+
+logging.basicConfig(format='%(asctime)s - %(message)s', datefmt='%d-%b-%y %H:%M:%S')
+
 
 app = Flask(__name__)
 
@@ -10,7 +17,9 @@ app = Flask(__name__)
 @app.route('/', methods=['GET', 'POST'])
 def box_pdf_render_pdfkit():
     if request.method == 'POST':
-        json_data = json.loads(request.data)
+        # json_data = json.loads(request.data.decode('utf-8'))
+        logging.error('%s raised an error', request.data)
+        json_data = json.loads(request.data.decode('utf-8'))
 
         # Cria as imagens dos códigos de barra
         body_with_barcode = []
@@ -40,9 +49,11 @@ def box_pdf_render_pdfkit():
         return response
 
 
-@app.route('/teste', methods=['GET'])
-def teste():
-    return 'Hello, World!'
+@app.route('/html_teste', methods=['GET'])
+def box_pdf_render_html():
+    data = dados_testes_html.informacao_caixa()
+    logging.error('%s raised an error', data)
+    return render_template('caixa.html', data=data)
 
 
 if __name__ == '__main__':

@@ -28,7 +28,7 @@
         <table>
             <tbody>
                 <tr>
-                    <td class="nome_cliente">Cliente:</td>
+                    <td class="nome_cliente">Cliente XXXX:</td>
                     <td class="nome_cliente">{{data.header.nome_cliente}}</td>
                 </tr>
                 <tr>
@@ -54,7 +54,7 @@
                     <th scope="col">Ordem Execução</th>
                     <th scope="col">Nome Ação</th>
                     <th scope="col">Tempo Meta</th>
-                    <th scope="col">Código de Barras</th>
+                    <!--<th scope="col">Código de Barras</th>-->
                     <th scope="col">Imagem</th>
                 </tr>
             </thead>
@@ -65,7 +65,7 @@
                <td class="ordem_execucao">{{item.ordem_execucao}}</td>
                <td class="nome_acao"><SPAN>{{item.nome_acao}}</SPAN></td>
                <td class="tempo_medio"><SPAN>{{item.tempo_medio}}</SPAN></td>
-               <td class="cod_bar"><SPAN>{{item.cod_bar}}</SPAN></td>
+               <!--<td class="cod_bar"><SPAN>{{item.cod_bar}}</SPAN></td>-->
                <td class="cod_bar_img"><img style="height: 120px" src="{{item.cod_bar_address}}"></td>
             </tr>
             {% endfor %}
