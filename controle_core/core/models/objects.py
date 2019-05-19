@@ -182,7 +182,8 @@ class Caixa(models.Model):
 
         body = []
         html_bloco = {}
-        for backlog in self.backlog_set.all():
+        # for backlog in self.backlog_set.all():
+        for backlog in self.backlog_set.all().order_by('ordem_execucao'):
             header = {'nome_cliente': backlog.cliente.nome_cliente,
                       'pedido_op': backlog.pedido_op,
                       'nome_caixa': backlog.caixa.id,
