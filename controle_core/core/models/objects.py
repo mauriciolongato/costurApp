@@ -181,6 +181,7 @@ class Caixa(models.Model):
         self.referencia = self.alocacao.referencia.nome_referencia
 
         body = []
+        header = {}
         html_bloco = {}
         # for backlog in self.backlog_set.all():
         for backlog in self.backlog_set.all().order_by('ordem_execucao'):

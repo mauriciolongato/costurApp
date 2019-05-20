@@ -7,7 +7,8 @@ from barcode.writer import ImageWriter
 def crop_img(endereco):
     img = Image.open(endereco)
     w, h = img.size
-    img.crop((0, 50, w, h-130)).save(endereco)
+    img.crop((0, 75, w, h-155)).save(endereco)
+    # img.crop((0, 50, w, h-130)).save(endereco)
 
 
 def create_barcode(codigo, barcode_class='code128'):
