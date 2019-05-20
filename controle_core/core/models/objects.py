@@ -221,12 +221,12 @@ class Caixa(models.Model):
 # BackLog
 class BackLog(models.Model):
     pedido_data_criacao = models.DateTimeField(auto_now_add=True)
-    caixa = models.ForeignKey(Caixa, on_delete=models.CASCADE)
-    sequencia_acao = models.ForeignKey(SequenciaAcao, on_delete=models.DO_NOTHING, null=True)
-    alocacao = models.ForeignKey(Alocacao, on_delete=models.CASCADE, null=True)
-    pedido = models.ForeignKey(Pedido, on_delete=models.DO_NOTHING, null=True)
-    cliente = models.ForeignKey(Cliente, on_delete=models.DO_NOTHING, null=True)
-    referencia = models.ForeignKey(Referencia, on_delete=models.DO_NOTHING, null=True)
+    caixa = models.ForeignKey(Caixa, on_delete=models.SET_NULL, null=True)
+    sequencia_acao = models.ForeignKey(SequenciaAcao, on_delete=models.SET_NULL, null=True)
+    alocacao = models.ForeignKey(Alocacao, on_delete=models.SET_NULL, null=True)
+    pedido = models.ForeignKey(Pedido, on_delete=models.SET_NULL, null=True)
+    cliente = models.ForeignKey(Cliente, on_delete=models.SET_NULL, null=True)
+    referencia = models.ForeignKey(Referencia, on_delete=models.SET_NULL, null=True)
 
     pedido_op = models.TextField(blank=True)
     nome_cliente = models.TextField(blank=True)
